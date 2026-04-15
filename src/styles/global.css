@@ -1,0 +1,43 @@
+@import 'tailwindcss';
+@import 'lenis/dist/lenis.css';
+
+@theme {
+  --color-burgundy: #560a17;
+  --color-burgundy-light: #74162d;
+  --color-cream: #f1e4c6;
+  --color-olive: #88a201;
+  --color-dark: #0a0a0a;
+
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Space Grotesk', sans-serif;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-burgundy);
+  color: var(--color-cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-cream);
+  color: var(--color-burgundy);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+}
+
+a {
+  transition: opacity 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.75;
+}

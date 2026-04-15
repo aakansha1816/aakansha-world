@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 380" fill="none" stroke="#f1e4c6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Head -->
+  <path class="silhouette-path" d="M130 45 C130 45 155 40 160 60 C165 80 160 100 150 110 C145 116 138 120 130 122 C122 120 115 116 110 110 C100 100 95 80 100 60 C105 40 130 45 130 45 Z"/>
+  <!-- Neck -->
+  <path class="silhouette-path" d="M120 122 L120 145 M140 122 L140 145"/>
+  <!-- Shoulders and torso -->
+  <path class="silhouette-path" d="M120 145 C100 148 60 160 45 185 C35 200 30 230 30 260 L30 375 L230 375 L230 260 C230 230 225 200 215 185 C200 160 160 148 140 145"/>
+</svg>

@@ -1,0 +1,61 @@
+---
+
+---
+
+<section
+  id="home"
+  class="relative flex min-h-screen flex-col justify-between overflow-hidden bg-burgundy px-6 pt-24 pb-10 md:px-10 lg:px-16"
+>
+  <div class="relative mt-auto flex flex-1 flex-col justify-center">
+    <!-- Hero image overlapping the name -->
+    <div
+      id="hero-image"
+      class="absolute top-1/2 right-0 z-10 w-[55%] max-w-[480px] -translate-y-[60%] opacity-0 md:right-[8%] lg:right-[12%]"
+    >
+      <img
+        src="/images/hero-placeholder.svg"
+        alt="Scenic landscape illustration with rolling green hills and a blue sky"
+        class="h-auto w-full rounded"
+        width="480"
+        height="540"
+        loading="eager"
+      />
+    </div>
+
+    <!-- Large name typography -->
+    <div class="relative z-20">
+      <h1 class="hero-name font-heading leading-[0.85] font-black tracking-tight text-cream">
+        <span
+          id="hero-line-1"
+          class="block text-[clamp(3rem,12vw,11rem)] opacity-0"
+        >
+          YOUR
+        </span>
+        <span
+          id="hero-line-2"
+          class="block text-right text-[clamp(3rem,12vw,11rem)] opacity-0 md:mr-0"
+        >
+          NAME
+        </span>
+      </h1>
+    </div>
+  </div>
+
+  <!-- Bottom links -->
+  <div id="hero-links" class="relative z-20 mt-8 flex gap-8 opacity-0">
+    <a
+      href="https://linkedin.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-xs font-medium tracking-[0.25em] text-cream uppercase hover:opacity-100"
+    >
+      LINKEDIN.
+    </a>
+    <a
+      href="#"
+      class="text-xs font-medium tracking-[0.25em] text-cream uppercase hover:opacity-100"
+    >
+      RESUME
+    </a>
+  </div>
+</section>

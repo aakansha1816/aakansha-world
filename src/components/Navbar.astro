@@ -1,0 +1,136 @@
+---
+interface Props {
+  solid?: boolean;
+}
+
+const { solid = false } = Astro.props;
+
+const homeHref = solid ? '/' : '#home';
+const navLinks = [
+  { label: 'HOME', href: solid ? '/' : '#home' },
+  { label: 'ABOUT', href: solid ? '/#about' : '#about' },
+  { label: 'BLOGS', href: solid ? '/#blogs' : '#blogs' },
+  { label: 'WORKS', href: solid ? '/#works' : '#works' },
+];
+const contactHref = solid ? '/#contact' : '#contact';
+---
+
+<header
+  id="navbar"
+  class:list={[
+    'fixed top-0 left-0 z-50 w-full px-6 transition-all duration-300 md:px-10 lg:px-16',
+    solid ? 'py-3 opacity-100' : 'py-5 opacity-0',
+  ]}
+  data-solid={solid ? 'true' : 'false'}
+  style={solid ? 'background-color:rgba(86,10,23,0.92);backdrop-filter:blur(12px);box-shadow:0 1px 12px rgba(0,0,0,0.25)' : ''}
+>
+  <nav class="flex items-center justify-between" aria-label="Main navigation">
+    <a
+      href={homeHref}
+      class="font-heading text-xl font-bold tracking-wide text-cream"
+    >
+      AB.
+    </a>
+
+    <ul class="hidden gap-8 md:flex lg:gap-12" role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="text-xs font-medium tracking-[0.25em] text-cream/80 uppercase transition-colors hover:text-cream hover:opacity-100"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a
+      href={contactHref}
+      class="hidden rounded-full border border-cream/60 px-6 py-2 text-xs font-medium tracking-[0.25em] text-cream uppercase transition-all hover:border-cream hover:bg-cream hover:text-burgundy hover:opacity-100 md:inline-block"
+    >
+      CONTACT ME
+    </a>
+
+    <button
+      id="menu-toggle"
+      class="flex flex-col gap-1.5 md:hidden"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span class="block h-0.5 w-6 bg-cream transition-transform duration-300"></span>
+      <span class="block h-0.5 w-6 bg-cream transition-opacity duration-300"></span>
+      <span class="block h-0.5 w-6 bg-cream transition-transform duration-300"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="pointer-events-none fixed inset-0 top-0 left-0 z-40 flex flex-col items-center justify-center gap-8 bg-burgundy opacity-0 transition-opacity duration-500 md:hidden"
+  >
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="mobile-link text-2xl font-medium tracking-[0.2em] text-cream uppercase"
+      >
+        {link.label}
+      </a>
+    ))}
+    <a
+      href={contactHref}
+      class="mobile-link mt-4 rounded-full border border-cream/60 px-8 py-3 text-sm tracking-[0.25em] text-cream uppercase"
+    >
+      CONTACT ME
+    </a>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const mobileLinks = menu?.querySelectorAll('.mobile-link');
+  let open = false;
+
+  function setMenu(state: boolean) {
+    open = state;
+    toggle?.setAttribute('aria-expanded', String(open));
+    if (menu) {
+      menu.style.opacity = open ? '1' : '0';
+      menu.style.pointerEvents = open ? 'auto' : 'none';
+    }
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  toggle?.addEventListener('click', () => setMenu(!open));
+  mobileLinks?.forEach((link) =>
+    link.addEventListener('click', () => setMenu(false)),
+  );
+
+  const navbar = document.getElementById('navbar');
+  const isSolid = navbar?.dataset.solid === 'true';
+
+  if (!isSolid) {
+    const scrollThreshold = 80;
+
+    function updateNavbar() {
+      if (!navbar) return;
+      if (window.scrollY > scrollThreshold) {
+        navbar.style.backgroundColor = 'rgba(86, 10, 23, 0.92)';
+        navbar.style.backdropFilter = 'blur(12px)';
+        navbar.style.paddingTop = '0.75rem';
+        navbar.style.paddingBottom = '0.75rem';
+        navbar.style.boxShadow = '0 1px 12px rgba(0,0,0,0.25)';
+      } else {
+        navbar.style.backgroundColor = 'transparent';
+        navbar.style.backdropFilter = 'none';
+        navbar.style.paddingTop = '';
+        navbar.style.paddingBottom = '';
+        navbar.style.boxShadow = 'none';
+      }
+    }
+
+    window.addEventListener('scroll', updateNavbar, { passive: true });
+    updateNavbar();
+  }
+</script>

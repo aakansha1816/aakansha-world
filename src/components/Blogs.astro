@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blogs');
+const posts = allPosts.sort((a, b) => {
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const [mA, yA] = a.data.date.split(' ');
+  const [mB, yB] = b.data.date.split(' ');
+  return +yB - +yA || months.indexOf(mB) - months.indexOf(mA);
+});
+---
+
+<section
+  id="blogs"
+  class="relative overflow-hidden bg-burgundy px-6 py-24 md:px-10 lg:px-16"
+>
+  <div class="mx-auto max-w-6xl">
+    <h2
+      class="blogs-heading font-heading text-5xl font-black tracking-tight text-cream opacity-0 md:text-7xl lg:text-8xl"
+    >
+      BLOGS
+    </h2>
+
+    <div class="mt-16 grid gap-8 md:grid-cols-3">
+      {posts.map((post, i) => (
+        <a
+          href={`/blogs/${post.id}`}
+          class="blog-card group cursor-pointer opacity-0 block"
+          data-index={i}
+        >
+          <time class="text-[10px] font-medium tracking-[0.3em] text-cream/40 uppercase md:text-xs">
+            {post.data.date}
+          </time>
+
+          <h3 class="mt-3 font-heading text-xl font-bold leading-snug text-cream transition-colors group-hover:text-cream/80 md:text-2xl">
+            {post.data.title}
+          </h3>
+
+          <p class="mt-4 text-sm leading-relaxed text-cream/60">
+            {post.data.excerpt}
+          </p>
+
+          <div class="mt-6 inline-flex items-center gap-2 border-b border-cream/20 pb-1 text-xs font-medium tracking-[0.2em] text-cream/50 uppercase transition-colors group-hover:border-cream/50 group-hover:text-cream/80">
+            <span>Read More</span>
+            <svg class="h-3 w-3 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1.5">
+              <path d="M1 6h10M7 2l4 4-4 4"/>
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

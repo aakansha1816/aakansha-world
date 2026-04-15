@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('works');
+---
+
+<section
+  id="works"
+  class="relative min-h-screen overflow-hidden bg-burgundy px-6 py-24 md:px-10 lg:px-16"
+>
+  <div class="mx-auto max-w-6xl">
+    <h2
+      class="works-heading font-heading text-5xl font-black tracking-tight text-cream opacity-0 md:text-7xl lg:text-8xl"
+    >
+      WORKS
+    </h2>
+
+    <div class="mt-16 grid gap-6 md:grid-cols-2 lg:gap-8">
+      {projects.map((project, i) => (
+        <a
+          href={`/works/${project.id}`}
+          class={`work-card group relative block overflow-hidden rounded-lg ${project.data.color} p-8 opacity-0 transition-transform duration-500 hover:-translate-y-1 md:p-10`}
+          data-index={i}
+        >
+          <span class="mb-4 inline-block text-[10px] font-semibold tracking-[0.3em] text-olive uppercase md:text-xs">
+            {project.data.category}
+          </span>
+          <h3 class="font-heading text-2xl font-bold text-cream md:text-3xl">
+            {project.data.title}
+          </h3>
+          <p class="mt-4 text-sm leading-relaxed text-cream/70 md:text-base">
+            {project.data.description}
+          </p>
+          <div class="mt-6 flex items-center gap-2 text-xs font-medium tracking-[0.2em] text-cream/50 uppercase transition-colors group-hover:text-cream/80">
+            <span>View Case Study</span>
+            <svg class="h-3 w-3 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1.5">
+              <path d="M1 6h10M7 2l4 4-4 4"/>
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

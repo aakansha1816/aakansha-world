@@ -1,0 +1,192 @@
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import Lenis from 'lenis';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // --- Lenis smooth scroll ---
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    touchMultiplier: 2,
+  });
+
+  lenis.on('scroll', ScrollTrigger.update);
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+  gsap.ticker.lagSmoothing(0);
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      const href = (anchor as HTMLAnchorElement).getAttribute('href');
+      if (!href) return;
+      const target = document.querySelector(href);
+      if (target) lenis.scrollTo(target as HTMLElement, { offset: 0 });
+    });
+  });
+
+  // --- Hero animations (on page load) ---
+  gsap.set('#navbar', { opacity: 0 });
+  gsap.set('#hero-line-1', { y: 40, opacity: 0 });
+  gsap.set('#hero-line-2', { y: 40, opacity: 0 });
+  gsap.set('#hero-image', { y: 60, opacity: 0 });
+  gsap.set('#hero-links', { opacity: 0 });
+
+  const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  heroTl
+    .to('#navbar', { opacity: 1, duration: 0.6, delay: 0.2 })
+    .to('#hero-line-1', { opacity: 1, y: 0, duration: 0.8 }, '-=0.3')
+    .to('#hero-line-2', { opacity: 1, y: 0, duration: 0.8 }, '-=0.5')
+    .to('#hero-image', { opacity: 1, y: 0, duration: 1 }, '-=0.6')
+    .to('#hero-links', { opacity: 1, duration: 0.6 }, '-=0.4');
+
+  gsap.to('#hero-image', {
+    y: -80,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#home',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true,
+    },
+  });
+
+  // --- About section ---
+  const silhouettePaths = document.querySelectorAll('.silhouette-path');
+  silhouettePaths.forEach((path) => {
+    const svgPath = path as SVGPathElement;
+    const length = svgPath.getTotalLength();
+    gsap.set(svgPath, { strokeDasharray: length, strokeDashoffset: length });
+  });
+
+  gsap.set('#silhouette-svg', { opacity: 0 });
+  gsap.set('#about-heading', { opacity: 0, y: 30 });
+  gsap.set('#about-bio', { opacity: 0, y: 30 });
+
+  gsap.to('#silhouette-svg', {
+    opacity: 1,
+    duration: 0.3,
+    scrollTrigger: { trigger: '#about', start: 'top 80%' },
+  });
+
+  silhouettePaths.forEach((path) => {
+    const svgPath = path as SVGPathElement;
+    gsap.to(svgPath, {
+      strokeDashoffset: 0,
+      duration: 1.5,
+      ease: 'power2.inOut',
+      scrollTrigger: {
+        trigger: '#about',
+        start: 'top 70%',
+        end: 'top 20%',
+        scrub: true,
+      },
+    });
+  });
+
+  gsap.utils.toArray<HTMLElement>('.skill-item').forEach((item, i) => {
+    gsap.set(item, { opacity: 0, x: i % 2 === 0 ? -30 : 30 });
+    gsap.to(item, {
+      opacity: 1,
+      x: 0,
+      duration: 0.6,
+      delay: i * 0.1,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: '#about', start: 'top 50%' },
+    });
+  });
+
+  gsap.to('#about-heading', {
+    opacity: 1,
+    y: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '#about-heading', start: 'top 85%' },
+  });
+
+  gsap.to('#about-bio', {
+    opacity: 1,
+    y: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '#about-bio', start: 'top 85%' },
+  });
+
+  // --- Works section ---
+  gsap.set('.works-heading', { opacity: 0, y: 40 });
+  gsap.to('.works-heading', {
+    opacity: 1,
+    y: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.works-heading', start: 'top 85%' },
+  });
+
+  gsap.utils.toArray<HTMLElement>('.work-card').forEach((card, i) => {
+    gsap.set(card, { opacity: 0, y: 50 });
+    gsap.to(card, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      delay: i * 0.15,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: card, start: 'top 90%' },
+    });
+  });
+
+  // --- Blogs section ---
+  gsap.set('.blogs-heading', { opacity: 0, y: 40 });
+  gsap.to('.blogs-heading', {
+    opacity: 1,
+    y: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.blogs-heading', start: 'top 85%' },
+  });
+
+  gsap.utils.toArray<HTMLElement>('.blog-card').forEach((card, i) => {
+    const fromX = i % 2 === 0 ? -40 : 40;
+    gsap.set(card, { opacity: 0, x: fromX });
+    gsap.to(card, {
+      opacity: 1,
+      x: 0,
+      duration: 0.7,
+      delay: i * 0.12,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: card, start: 'top 90%' },
+    });
+  });
+
+  // --- Contact section ---
+  gsap.set('.contact-heading', { opacity: 0, y: 40 });
+  gsap.set('.contact-sub', { opacity: 0, y: 20 });
+  gsap.set('#contact-form', { opacity: 0, y: 40 });
+
+  gsap.to('.contact-heading', {
+    opacity: 1,
+    y: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.contact-heading', start: 'top 85%' },
+  });
+
+  gsap.to('.contact-sub', {
+    opacity: 1,
+    y: 0,
+    duration: 0.6,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.contact-sub', start: 'top 85%' },
+  });
+
+  gsap.to('#contact-form', {
+    opacity: 1,
+    y: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '#contact-form', start: 'top 85%' },
+  });
+</script>

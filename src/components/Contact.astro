@@ -1,0 +1,115 @@
+---
+
+---
+
+<section
+  id="contact"
+  class="relative overflow-hidden bg-burgundy px-6 py-24 md:px-10 lg:px-16"
+>
+  <div class="mx-auto max-w-4xl text-center">
+    <h2
+      class="contact-heading font-heading text-5xl font-black tracking-tight text-cream opacity-0 md:text-7xl lg:text-8xl"
+    >
+      LET'S TALK
+    </h2>
+
+    <p class="contact-sub mx-auto mt-6 max-w-lg text-base text-cream/60 opacity-0 md:text-lg">
+      Have a project in mind, a brand that needs a story, or just want to
+      connect? Drop a message and let's make something great.
+    </p>
+
+    <form
+      id="contact-form"
+      class="mx-auto mt-14 max-w-xl space-y-6 text-left opacity-0"
+      action="#"
+      method="POST"
+    >
+      <div>
+        <label for="name" class="mb-2 block text-[10px] font-medium tracking-[0.3em] text-cream/50 uppercase md:text-xs">
+          Name
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          autocomplete="name"
+          class="w-full border-b border-cream/20 bg-transparent px-0 py-3 text-base text-cream placeholder:text-cream/30 transition-colors focus:border-cream/60 focus:outline-none"
+          placeholder="Your name"
+        />
+      </div>
+
+      <div>
+        <label for="email" class="mb-2 block text-[10px] font-medium tracking-[0.3em] text-cream/50 uppercase md:text-xs">
+          Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          autocomplete="email"
+          class="w-full border-b border-cream/20 bg-transparent px-0 py-3 text-base text-cream placeholder:text-cream/30 transition-colors focus:border-cream/60 focus:outline-none"
+          placeholder="you@example.com"
+        />
+      </div>
+
+      <div>
+        <label for="message" class="mb-2 block text-[10px] font-medium tracking-[0.3em] text-cream/50 uppercase md:text-xs">
+          Message
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          required
+          class="w-full resize-none border-b border-cream/20 bg-transparent px-0 py-3 text-base text-cream placeholder:text-cream/30 transition-colors focus:border-cream/60 focus:outline-none"
+          placeholder="Tell me about your project…"
+        ></textarea>
+      </div>
+
+      <div class="pt-4 text-center">
+        <button
+          type="submit"
+          class="inline-block rounded-full border border-cream/60 px-10 py-3 text-xs font-medium tracking-[0.25em] text-cream uppercase transition-all hover:bg-cream hover:text-burgundy"
+        >
+          SEND MESSAGE
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="border-t border-cream/10 bg-burgundy px-6 py-10 md:px-10 lg:px-16">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 md:flex-row">
+    <span class="font-heading text-lg font-bold tracking-wide text-cream">AB.</span>
+
+    <div class="flex gap-8">
+      <a
+        href="https://linkedin.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-[10px] font-medium tracking-[0.25em] text-cream/50 uppercase transition-colors hover:text-cream hover:opacity-100 md:text-xs"
+      >
+        LinkedIn
+      </a>
+      <a
+        href="mailto:hello@example.com"
+        class="text-[10px] font-medium tracking-[0.25em] text-cream/50 uppercase transition-colors hover:text-cream hover:opacity-100 md:text-xs"
+      >
+        Email
+      </a>
+      <a
+        href="#"
+        class="text-[10px] font-medium tracking-[0.25em] text-cream/50 uppercase transition-colors hover:text-cream hover:opacity-100 md:text-xs"
+      >
+        Resume
+      </a>
+    </div>
+
+    <p class="text-[10px] tracking-wider text-cream/30 md:text-xs">
+      &copy; {new Date().getFullYear()} YOUR NAME. All rights reserved.
+    </p>
+  </div>
+</footer>
